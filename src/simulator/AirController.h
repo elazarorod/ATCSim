@@ -25,6 +25,8 @@
 #ifndef AIRCONTROLLER_H_
 #define AIRCONTROLLER_H_
 
+#include <list>
+#include "Position.h"
 #include "Singleton.h"
 
 namespace atcsim{
@@ -33,6 +35,7 @@ class AirController: public Singleton<AirController> {
 public:
 	AirController();
 	virtual ~AirController();
+	std::list<Position> doPositions();
 
 	void doWork();
 };

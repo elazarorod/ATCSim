@@ -305,9 +305,15 @@ Airport::checkCollisions()
 			if( (*i)->getPosition().distance((*j)->getPosition()) < COLLISION_DISTANCE)
 			{
 				std::cerr<<"Collision between "<<(*i)->getId()<<" and "<<(*j)->getId()<<std::endl;
+
+				if(((*i)->getId() == id_landing)  || ((*j)->getId() == id_landing)){
+					any_landing_ = false;
+				}
+
 				i = removeFlight((*i)->getId());
 				j = removeFlight((*j)->getId());
 				points += COLLISION_POINTS;
+
 				return; //Avoid not valid iterator. Only one collision per cycle
 			}
 			j++;

@@ -60,21 +60,27 @@ public:
 	virtual int getMaxFlights(const Ice::Current&);
 	virtual int getPoints(const Ice::Current&);
 
-  void book_landing() {any_landing_ = true;}
+  void book_landing(const std::string& id) {any_landing_ = true;
+											id_landing = id;}
   bool is_booked_landing() { return any_landing_;}
 
+protected:
+
+	void checkLandings();		//TODO
+	void checkCollisions();		//TODO
+	void checkCrashes();		//TODO
+	void checkFinishStorm();		//TODO
+	void generate_flight();
+	void generate_storm();
+	void checkFlightsInStorm();		//TODO
+
+	std::string id_landing;
+
+	std::list<Flight*>::iterator removeFlight(std::string id);
 
 private:
 
-	void checkLandings();
-	void checkCollisions();
-	void checkCrashes();
-	void checkFinishStorm();
-	void generate_flight();
-	void generate_storm();
-	void checkFlightsInStorm();
 
-	std::list<Flight*>::iterator removeFlight(std::string id);
 
 	std::list<Flight*> flights;
 	std::list<Flight*>::iterator focus;
@@ -95,6 +101,7 @@ private:
 	float acum_;
 
   bool any_landing_;
+	//std::string id_landing;
 
 };
 
